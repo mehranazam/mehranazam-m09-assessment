@@ -8,11 +8,11 @@ _TODO_ Add time estimates to each of the top-level tasks
 
 ### Part 0: Set Up and Planning
 
-- [ ] Create a new GitHub repo for this assessment or continue working in the repo from last week's React Field Agent repository (#.# hours)
-  - [ ] **When creating your repo, be sure to add a `.gitignore` file using the GitHub Node template**
-  - [ ] Update the README with the contents from this file
-  - [ ] If not done, add the instruction team as collaborators
-- [ ] Create a new branch for all work on the assessment
+- [x] Create a new GitHub repo for this assessment or continue working in the repo from last week's React Field Agent repository (0.1 hours)
+  - [x] **When creating your repo, be sure to add a `.gitignore` file using the GitHub Node template**
+  - [x] Update the README with the contents from this file
+  - [x] If not done, add the instruction team as collaborators
+- [x] Create a new branch for all work on the assessment
   - From within the local repo, create the branch by running the command `git checkout -b assessment-work` (this command creates a branch named `assessment-work` and makes the new branch the active branch)
   - Push the branch to the remote repo by running the command `git push --set-upstream origin assessment-work`
   - _Now just stay on the `assessment-work` branch and use the normal git workflow:_
