@@ -1,6 +1,8 @@
 package learn.field_agent.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -14,6 +16,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
     private final JwtConverter converter;
 
     public SecurityConfig(JwtConverter converter) {
@@ -29,6 +32,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 // TODO add antMatchers here to configure access to specific API endpoints
                 // require authentication for any request...
+                .antMatchers(HttpMethod.POST, "/api/security/login").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/agent/*").permitAll()
+                .antMatchers(HttpMethod.DELETE, "/api/agent/*").hasAnyRole("USER", "ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JwtRequestFilter(authenticationManager(), converter))

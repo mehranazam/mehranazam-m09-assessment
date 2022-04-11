@@ -22,10 +22,10 @@ _TODO_ Add time estimates to each of the top-level tasks
     - Run `git commit -m "Some commit message"` to commit changes
     - Run `git push` to push changes to the remote repo
     - Rinse and repeat!
-- [ ] Download the starter project for this assessment and add the files to your repo
+- [x] Download the starter project for this assessment and add the files to your repo
   - **See your instruction team for the correct files to use!**
-- [ ] Review the requirements (#.# hours)
-- [ ] Identify any research that I need to do (#.# hours)
+- [x] Review the requirements (0.5 hours)
+- [x] Identify any research that I need to do (0.5 hours)
 
 ---
 
@@ -35,16 +35,16 @@ _Note: The following sequence of tasks is focused on keeping refactoring to a mi
 
 _Use the SQL script included in the starter code to create your database and the initial data_
 
-- [ ] Create the AuthController with an endpoint for authenticating users (#.# hours)
-- [ ] Update the security configuration ant matchers to allow anonymous requests to the AuthController endpoint for authenticating users (#.# hours)
+- [x] Create the AuthController with an endpoint for authenticating users (0.5 hours)
+- [ ] Update the security configuration ant matchers to allow anonymous requests to the AuthController endpoint for authenticating users (0.5 hours)
       **Make sure that my GitHub repo is updated (i.e. push all commits to my local feature branch to the remote repo)!**
 
 ### Part 2: Client-Side Routes
 
-- [ ] Implement the required client-side routes (#.# hours)
-  - [ ] Install `react-router-dom`
-  - [ ] Define the necessary client-side routes (see the list of routes below)
-  - [ ] Stub out any components that are needed to support the client-side routes
+- [ ] Implement the required client-side routes (1.5 hours)
+  - [x] Install `react-router-dom`
+  - [x] Define the necessary client-side routes (see the list of routes below)
+  - [x] Stub out any components that are needed to support the client-side routes
     - _Note: Stub out the individual Agents CRUD UI components but hold off on moving any code from last week's monolithic Agents CRUD UI component to the individual components_
   - [ ] Display a "Not Found" message if a route doesn't match one of the defined routes
         **Make sure that my GitHub repo is updated (i.e. push all commits to my local feature branch to the remote repo)!**
@@ -52,25 +52,25 @@ _Use the SQL script included in the starter code to create your database and the
 ### Part 3: User Login
 
 - [ ] Create a "Login" component (#.# hours)
-  - [ ] Add a form with "Username" and "Password" fields
-  - [ ] Use `fetch` to `POST` the user's information to the User API
+  - [x] Add a form with "Username" and "Password" fields
+  - [x] Use `fetch` to `POST` the user's information to the User API
   - [ ] Use an existing user's information to test that the API returns an auth token
-- [ ] Add the necessary user state and helper functions to the App component (#.# hours)
-  - [ ] Add a state variable to track the current user
-  - [ ] Add a function to login a user
+- [x] Add the necessary user state and helper functions to the App component (1.0 hours)
+  - [x] Add a state variable to track the current user
+  - [x] Add a function to login a user
   - [ ] Add a function to logout a user
   - [ ] Collect the user state variable along with the login/logout helper functions into a single `auth` object
-- [ ] Create a React context to track user auth (#.# hours)
-  - [ ] Create the context in its own module
-  - [ ] Update the App component to provide the context to the entire app
-  - [ ] Set the context's `value` to the `auth` object
+- [x] Create a React context to track user auth (1.0 hours)
+  - [x] Create the context in its own module
+  - [x] Update the App component to provide the context to the entire app
+  - [x] Set the context's `value` to the `auth` object
 - [ ] Update the "Login" component (#.# hours)
-  - [ ] Consume the user auth context
-  - [ ] After a successful `POST` to the User API, call the auth context's login function and pass in the auth token and redirect the user to the "Home" route
-- [ ] Update the header/navbar component (#.# hours)
-  - [ ] Consume the user auth context
-  - [ ] When there's a logged in user, display the user's username and "Logout" button
-  - [ ] When there's not a logged in user, display links for the "Login" and "Register" routes
+  - [x] Consume the user auth context
+  - [x] After a successful `POST` to the User API, call the auth context's login function and pass in the auth token and redirect the user to the "Home" route
+- [ ] Update the header/navbar component (2.0 hours)
+  - [x] Consume the user auth context
+  - [x] When there's a logged in user, display the user's username and "Logout" button
+  - [x] When there's not a logged in user, display links for the "Login" and "Register" routes
   - [ ] When the "Logout" button is clicked, call the auth context's logout function
 - [ ] Protect each of the agent related routes (#.# hours)
   - [ ] When there's a logged in user, display the route's associated component
@@ -79,10 +79,10 @@ _Use the SQL script included in the starter code to create your database and the
 
 ### Part 4: Agents CRUD UI Component Refactoring
 
-- [ ] Update the "Agents" component (#.# hours)
-  - [ ] Update the "Add Agent" button to redirect the user to the "Add Agent" route (if not already completed)
-  - [ ] Update the individual agent "Edit" and "Delete" buttons to redirect the user to the appropriate routes (if not already implemented)
-- [ ] Update the "Add Agent" component (#.# hours)
+- [ ] Update the "Agents" component (2.0 hours)
+  - [x] Update the "Add Agent" button to redirect the user to the "Add Agent" route (if not already completed)
+  - [x] Update the individual agent "Edit" and "Delete" buttons to redirect the user to the appropriate routes (if not already implemented)
+- [ ] Update the "Add Agent" component (2.0 hours)
   - [ ] Move code from the "Agents" component into the "Add Agent" component
   - [ ] After a successful `POST` to the Field Agent API, redirect the user to the "Agents" route
 - [ ] Update the "Edit Agent" component (#.# hours)
