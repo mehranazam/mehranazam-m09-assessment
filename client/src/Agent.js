@@ -1,10 +1,21 @@
 import DeleteAgent from "./DeleteAgent";
 import { useContext } from "react";
 import AuthContext from "./AuthContext";
+import EditAgent from "./EditAgent";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function Agent(props) {
   const { agentId, firstName, lastName, middleName, dob, heightInInches } =
     props.agentObj;
+
+  const [user, setUser] = useContext(AuthContext);
+
+  const navigate = useNavigate();
+
+  const handleEditAgent = (event) => {
+    event.preventDefault();
+    navigate("/agents/edit/" + agentId);
+  };
 
   function removeAgentFromState() {
     props.setAgents(
@@ -12,8 +23,11 @@ function Agent(props) {
     );
   }
   function handleDeleteAgent() {
-    fetch("http://localhost:8080/api/agent" + agentId, {
+    fetch("http://localhost:8080/api/agent/" + agentId, {
       method: "DELETE",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
     })
       .then((response) => {
         console.log(response);
@@ -21,7 +35,6 @@ function Agent(props) {
       })
       .catch((rejection) => console.log(rejection));
   }
-
   return (
     <div className="agent-card">
       <p>
@@ -39,12 +52,11 @@ function Agent(props) {
       <p>
         <b>Height (in):</b> {heightInInches}
       </p>
-      <Form
-        agentObj={props.agentObj}
-        agents={props.agents}
-        setAgents={props.setAgents}
-      />
-      <button onClick={() => props.handleDeleteAgent()}>X</button>
+
+      {user?.user ? (
+        <button onClick={handleEditAgent}>Edit Agent</button>
+      ) : null}
+      <button onClick={() => handleDeleteAgent()}>X</button>
     </div>
   );
 }

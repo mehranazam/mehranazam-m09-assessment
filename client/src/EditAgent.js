@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import AuthContext from "./AuthContext";
 
 function EditAgent(props) {
   const [firstName, setFirstName] = useState("");
@@ -7,32 +9,80 @@ function EditAgent(props) {
   const [dob, setDOB] = useState("");
   const [height, setHeight] = useState("");
 
+  const { id } = useParams();
+
+  const [userStatus, setUserStatus] = useContext(AuthContext);
+
+  const [toEdit, setToEdit] = useState(null);
+
+  const navigate = useNavigate();
+  /*
   function editFormShow() {
-    let editForm = document.querySelector("#edit-form");
+    let editForm = document.getElementById("#edit-form");
     if (editForm.classList.contains("hidden")) {
       editForm.classList.remove("hidden");
     } else {
       editForm.classList.add("hidden");
     }
   }
+*/
+
+  useEffect(() => {
+    const jwt = localStorage.getItem("token");
+    console.log(jwt);
+    if (jwt) {
+      fetch("http://localhost:8080/api/agent/" + id, {
+        headers: {
+          Authorization: "Bearer " + jwt,
+        },
+      })
+        .then((response) => {
+          if (response.status === 200) {
+            return response.json();
+          } else {
+            console.log(response);
+            alert("retrieving Agent failed!");
+          }
+        })
+        .then((retrievedAgent) => {
+          console.log(retrievedAgent);
+          setToEdit(retrievedAgent);
+        })
+        .catch((rejection) => {
+          console.log(rejection);
+          alert("Something very bad happened...");
+        });
+    }
+  }, []);
+
   function handleFirstNameChange(event) {
-    setFirstName(event.target.value);
+    let copy = { ...toEdit };
+    copy.firstName = event.target.value;
+    setToEdit(copy);
   }
 
   function handleMiddleNameChange(event) {
-    setMiddleName(event.target.value);
+    let copy = { ...toEdit };
+    copy.middleName = event.target.value;
+    setToEdit(copy);
   }
 
   function handleLastNameChange(event) {
-    setLastName(event.target.value);
+    let copy = { ...toEdit };
+    copy.lastName = event.target.value;
+    setToEdit(copy);
   }
 
   function handleDOBChange(event) {
-    setDOB(event.target.value);
+    let copy = { ...toEdit };
+    copy.dob = event.target.value;
+    setToEdit(copy);
   }
 
   function handleHeightChange(event) {
-    setHeight(event.target.value);
+    let copy = { ...toEdit };
+    copy.heightInInches = event.target.value;
+    setToEdit(copy);
   }
 
   function replaceAgent(agentObj) {
@@ -44,64 +94,77 @@ function EditAgent(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    let agentCopy = { ...props.agentObj };
-    agentCopy.firstName = firstName;
-    agentCopy.middleName = middleName;
-    agentCopy.lastName = lastName;
-    agentCopy.dob = dob;
-    agentCopy.height = height;
 
-    fetch("http://localhost:8080/api/agent/" + agentCopy.agentId, {
+    let agentCopy = { ...toEdit };
+
+    const jwt = localStorage.getItem("token");
+
+    // let agentCopy = { ...props.agentObj };
+    // agentCopy.firstName = firstName;
+    // agentCopy.middleName = middleName;
+    // agentCopy.lastName = lastName;
+    // agentCopy.dob = dob;
+    // agentCopy.height = height;
+
+    fetch("http://localhost:8080/api/agent/" + id, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        Authorization: "Bearer " + jwt,
       },
+
       body: JSON.stringify(agentCopy),
     })
-      .then((response) =>
-        response.ok
-          ? replaceAgent(agentCopy)
-          : alert("Something went wrong!" + response)
-      )
-      .catch((rejection) => alert(rejection));
-    editFormShow();
+      .then((response) => {
+        if (response.status === 200) {
+          navigate("/");
+        } else {
+          console.log(response);
+          alert("update failed!");
+        }
+      })
+      .catch((rejection) => {
+        alert(rejection);
+        console.log(rejection);
+        // editFormShow();
+      });
   }
 
   return (
     <>
       <form id="edit-form" className="hidden" onSubmit={handleSubmit}>
-        <label for="first-name">First Name:</label>
+        <label htmlFor="first-name">First Name:</label>
         <br />
         <br />
         <input onChange={handleFirstNameChange} id="first-name"></input>
         <br />
         <br />
-        <label for="middle-name">Middle Initial:</label>
+        <label htmlFor="middle-name">Middle Initial:</label>
         <br />
         <br />
         <input onChange={handleMiddleNameChange} id="middle-name"></input>
         <br />
         <br />
-        <label for="last-name">Last Name:</label>
+        <label htmlFor="last-name">Last Name:</label>
         <br />
         <br />
         <input onChange={handleLastNameChange} id="last-name"></input>
         <br />
         <br />
-        <label for="dob">DOB:</label>
+        <label htmlFor="dob">DOB:</label>
         <br />
         <br />
         <input onChange={handleDOBChange} id="dob"></input>
         <br />
         <br />
-        <label for="height">Height:</label>
+        <label htmlFor="height">Height:</label>
         <br />
         <br />
         <input onChange={handleHeightChange} id="height"></input>
         <br />
         <button>Submit</button>
       </form>
-      <button onClick={editFormShow}>Edit</button>
+      {/* <button onClick={editFormShow}>Edit</button> */}
     </>
   );
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import AuthContext from "./AuthContext";
@@ -6,7 +6,7 @@ import AuthContext from "./AuthContext";
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setUser] = useState(AuthContext);
+  const [user, setUser] = useContext(AuthContext);
   const navigate = useNavigate();
 
   function submitHandler(event) {

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function AddAgent() {
+function AddAgent(props) {
   const [firstName, setFirstName] = useState("");
   const [middleName, setMiddleName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -30,9 +30,9 @@ function AddAgent() {
     setHeightInInches(parseInt(e.target.value));
   }
 
-  function addNewAgentToState(newAgentObject) {
-    props.setAgents([...props.agents, newAgentObject]);
-  }
+  // function addNewAgentToState(newAgentObject) {
+  //   props.setAgents([...props.agents, newAgentObject]);
+  // }
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -48,14 +48,19 @@ function AddAgent() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
       },
       body: JSON.stringify(newAgent),
     })
       .then((response) => {
-        alert(response.statusText + " agent!");
-        navigate("/agents");
+        if (response.ok) {
+          navigate("/agent");
+        } else {
+          alert(response.statusText + " Failure!!");
+        }
       })
-      .then((newAgentObj) => addNewAgentToState(newAgentObj))
+      //.then((newAgentObj) => //addNewAgentToState(newAgentObj))
       .catch((rejection) => console.log("Failure! ", rejection));
   }
 

@@ -22,7 +22,7 @@ function Agents() {
     console.log(rejectionMessage);
   }
 
-  function AgentFactory() {
+  function agentFactory() {
     return agents.map((agentObj) => (
       <Agent
         key={agentObj.agentId}
@@ -33,8 +33,13 @@ function Agents() {
     ));
   }
 
-  return (
-    <div>
+  return <>{agentFactory()}</>;
+}
+
+export default Agents;
+
+{
+  /* <div>
       <Routes>
         <Route path="/add-agent" element={AddAgent}></Route>
 
@@ -43,8 +48,5 @@ function Agents() {
         <Route path="/delete-agent" element={Agent}></Route>
         <Route path="/edit-agent" element={EditAgent}></Route>
       </Routes>
-    </div>
-  );
+    </div> */
 }
-
-export default Agents;

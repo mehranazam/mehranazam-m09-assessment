@@ -1,9 +1,18 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import AuthContext from "./AuthContext";
 
 function Nav() {
   const [user, setUser] = useContext(AuthContext);
+
+  const navigate = useNavigate();
+
+  function handleLogout() {
+    localStorage.removeItem("token");
+    setUser(null);
+    navigate("/");
+  }
 
   return (
     <nav>
@@ -14,20 +23,17 @@ function Nav() {
 
         {user?.user ? (
           <div>
-            <li>Logout {user.user.sub}</li>
             <li>
-              <Link to="agents">Show All Agents</Link> | &nbsp;{" "}
+              <button onClick={handleLogout}>Logout {user.user.sub}</button>
             </li>
+
             <li>
-              <Link to="add">Add New Agent</Link> | &nbsp;{" "}
-            </li>
-            <li>
-              <Link to="edit-form">Update Agent</Link> &nbsp;{" "}
+              <Link to="/agent/add">Add New Agent</Link> | &nbsp;{" "}
             </li>
           </div>
         ) : (
           <li>
-            <link to="/login">Login</link>
+            <Link to="/login">Login</Link>
           </li>
         )}
       </ul>

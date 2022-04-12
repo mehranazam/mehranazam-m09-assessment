@@ -1,6 +1,7 @@
 package learn.field_agent.controllers;
 
 
+import learn.field_agent.security.AppUserService;
 import learn.field_agent.security.JwtConverter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,9 +22,9 @@ public class AuthController {
 
     AuthenticationManager authenticationManager;
     JwtConverter converter;
-    UserService userService;
+    AppUserService userService;
 
-    public AuthController(AuthenticationManager authenticationManager, JwtConverter converter, UserService userService) {
+    public AuthController(AuthenticationManager authenticationManager, JwtConverter converter, AppUserService userService) {
         this.authenticationManager = authenticationManager;
         this.converter = converter;
         this.userService = userService;
