@@ -33,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // TODO add antMatchers here to configure access to specific API endpoints
                 // require authentication for any request...
                 .antMatchers(HttpMethod.POST, "/api/security/login").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/agent/*", "/api/agent").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/agent/*", "/api/agent").authenticated()
                 .antMatchers(HttpMethod.POST, "/api/agent").authenticated()
                 .antMatchers(HttpMethod.PUT, "/api/agent/*").authenticated()
                 .antMatchers(HttpMethod.DELETE, "/api/agent/*").hasAnyRole("USER", "ADMIN")

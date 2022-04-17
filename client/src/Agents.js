@@ -1,15 +1,35 @@
 import { useState, useEffect } from "react";
 import Agent from "./Agent";
 import AddAgent from "./AddAgent";
+import { useNavigate } from "react-router-dom";
 
 function Agents() {
   const [agents, setAgents] = useState([]);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
-    fetch("http://localhost:8080/api/agent")
-      .then((response) => response.json())
-      .then((jsonData) => setAgents(jsonData))
-      .catch((rejection) => () => errorHandler(rejection));
+    const jwt = localStorage.getItem("token");
+    if (jwt) {
+      fetch("http://localhost:8080/api/agent", {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + jwt,
+        },
+      })
+        .then((response) => {
+          if (response.status === 200) {
+            return response.json();
+          } else {
+            console.log(response);
+            alert("Could not load Agents!");
+          }
+        })
+        .then((jsonData) => setAgents(jsonData))
+        .catch((rejection) => () => errorHandler(rejection));
+    } else {
+      navigate("/login");
+    }
   }, []);
 
   // useEffect(ANONYMOUS - FUNCTION, LIMITER);

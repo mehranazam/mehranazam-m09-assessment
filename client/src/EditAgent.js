@@ -116,8 +116,8 @@ function EditAgent(props) {
       body: JSON.stringify(agentCopy),
     })
       .then((response) => {
-        if (response.status === 200) {
-          navigate("/");
+        if (response.status === 204) {
+          navigate("/agent");
         } else {
           console.log(response);
           alert("update failed!");
@@ -136,31 +136,52 @@ function EditAgent(props) {
         <label htmlFor="first-name">First Name:</label>
         <br />
         <br />
-        <input onChange={handleFirstNameChange} id="first-name"></input>
+        <input
+          onChange={handleFirstNameChange}
+          value={toEdit.firstName}
+          id="first-name"
+        ></input>
         <br />
         <br />
         <label htmlFor="middle-name">Middle Initial:</label>
         <br />
         <br />
-        <input onChange={handleMiddleNameChange} id="middle-name"></input>
+        <input
+          onChange={handleMiddleNameChange}
+          value={toEdit.middleName}
+          id="middle-name"
+        ></input>
         <br />
         <br />
         <label htmlFor="last-name">Last Name:</label>
         <br />
         <br />
-        <input onChange={handleLastNameChange} id="last-name"></input>
+        <input
+          onChange={handleLastNameChange}
+          value={toEdit.lastName}
+          id="last-name"
+        ></input>
         <br />
         <br />
         <label htmlFor="dob">DOB:</label>
         <br />
         <br />
-        <input onChange={handleDOBChange} id="dob"></input>
+        <input
+          onChange={handleDOBChange}
+          value={toEdit.dob}
+          type="date"
+          id="dob"
+        ></input>
         <br />
         <br />
         <label htmlFor="height">Height:</label>
         <br />
         <br />
-        <input onChange={handleHeightChange} id="height"></input>
+        <input
+          onChange={handleHeightChange}
+          value={toEdit.heightInInches}
+          id="height"
+        ></input>
         <br />
         <button>Submit</button>
       </form>
