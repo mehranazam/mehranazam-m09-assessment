@@ -183,7 +183,7 @@ function EditAgent(props) {
           id="height"
         ></input>
         <br />
-        <button>Submit</button>
+        <button type="submit">Submit</button>
       </form>
       {/* <button onClick={editFormShow}>Edit</button> */}
     </>

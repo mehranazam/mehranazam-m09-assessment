@@ -5,6 +5,7 @@ import Login from "./Login";
 import Agents from "./Agents";
 import AddAgent from "./AddAgent";
 import EditAgent from "./EditAgent";
+import DeleteAgent from "./DeleteAgent";
 import Home from "./Home";
 import NotFound from "./NotFound";
 import Nav from "./Nav";
@@ -21,6 +22,7 @@ function App() {
           <Route path="/agent" element={<Agents />} />
           <Route path="/agent/add" element={<AddAgent />} />
           <Route path="/agents/edit/:id" element={<EditAgent />} />
+          <Route path="/agents/delete/:id" element={<DeleteAgent />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
