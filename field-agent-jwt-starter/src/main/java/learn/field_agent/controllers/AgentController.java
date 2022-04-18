@@ -41,11 +41,12 @@ public class AgentController {
 
     @PutMapping("/{agentId}")
     public ResponseEntity<Object> update(@PathVariable int agentId, @RequestBody Agent agent) {
+
         if (agentId != agent.getAgentId()) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
-
         Result<Agent> result = service.update(agent);
+
         if (result.isSuccess()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
